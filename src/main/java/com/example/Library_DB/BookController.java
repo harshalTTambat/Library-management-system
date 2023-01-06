@@ -1,28 +1,44 @@
 package com.example.Library_DB;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class BookController {
-
     @Autowired
-
     BookService bookService;
     @PostMapping("/add_book")
-    public ResponseEntity<String> createBook(@RequestBody() Book book)
-    {
-        String temp = bookService.createBook(book);
-        return new ResponseEntity<>(temp, HttpStatus.OK);
+    public String createBook(@RequestBody() Book book) {
+        // in this layer we are handling it by try catch
+        try {
+            return bookService.createBook(book);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     @GetMapping("/get_book")
-    public ResponseEntity<Book> getBook(@RequestParam("id") int id)
+    public Book getBook(@RequestParam("id") int id)
     {
-        Book book = bookService.getBook(id);
-        return new ResponseEntity<>(book,HttpStatus.OK);
+       try {
+           Book book = bookService.getBookById(id);
+           return book;
+       } catch (Exception e) {
+           throw new RuntimeException(e);
+       }
+
     }
+    @PutMapping("/update_pages")
+    public String updatePages(@RequestBody() UpdateBookPages updateBookPages)
+    {
+        return bookService.updateBookPages(updateBookPages);
+    }
+    @GetMapping("/get_bookNames_and_authors")
+    public List<ResponseObj> getBookNamesAndAuthors()
+    {
 
-
+       List<ResponseObj> response = bookService.getBookNamesAndAuthors();
+       return response;
+    }
 }

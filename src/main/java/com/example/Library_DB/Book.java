@@ -10,34 +10,34 @@ public class Book {
 @Id  // must write , to represent primary key in table
     private int id;
 // by default column names in my sql are same as attribute names in this class
-    private String bookName;
+    private String name;
     private int pages;
     private String author;
 
     public Book() {
     }
 
-    public Book(int bookId, String bookName, int pages, String author) {
-        this.id = bookId;
-        this.bookName = bookName;
+    public Book(int id, String name, int pages, String author) {
+        this.id = id;
+        this.name = name;
         this.pages = pages;
         this.author = author;
     }
 
-    public int getBookId() {
+    public int getId() {
         return id;
     }
 
-    public void setBookId(int bookId) {
-        this.id = bookId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getBookName() {
-        return bookName;
+    public String getName() {
+        return name;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getPages() {
@@ -52,7 +52,7 @@ public class Book {
         return author;
     }
 
-    public void setAuthor(String auther) {
-        this.author = auther;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
