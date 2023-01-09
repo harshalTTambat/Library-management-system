@@ -1,5 +1,6 @@
 package com.example.Library_DB;
 
+import com.example.Library_DB.Models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

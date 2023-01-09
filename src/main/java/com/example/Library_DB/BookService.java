@@ -1,5 +1,6 @@
 package com.example.Library_DB;
 
+import com.example.Library_DB.Models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @Service
 public class BookService {
     @Autowired
-     BookRepository bookRepository;
+     BookRepository bookRepository ;
     // mocking the interface
 
     public String createBook(Book book) throws Exception
@@ -17,12 +18,19 @@ public class BookService {
         // validation logic
         // checking if the book id is already present
         // we don't want to override the book if by mistake user send same id twice
-        if (bookRepository.findById(book.getId()).get()!= null)
+        try {
+            if (bookRepository.findById(book.getId()).get() == null)
+            {
+                throw new Exception();
+            }
+            return "Book is already present ";
+        }
+        catch (Exception e)
         {
-            throw new Exception("book is already present");
-        }else
-        bookRepository.save(book);
-        return "successfully added a book..";
+            bookRepository.save(book);
+            return "successfully added a book..";
+        }
+
     }
     public Book getBookById(int id) throws Exception
     {

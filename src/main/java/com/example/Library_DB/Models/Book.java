@@ -1,11 +1,9 @@
-package com.example.Library_DB;
+package com.example.Library_DB.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="book_table") // if table name is not specify it will take class name by default
+@Table(name="Books") // if table name is not specify it will take class name by default
 public class Book {
 @Id  // must write , to represent primary key in table
     private int id;
@@ -13,6 +11,11 @@ public class Book {
     private String name;
     private int pages;
     private String author;
+
+    // book is as child of student class
+    @ManyToOne
+    @JoinColumn
+    private Student student; // connecting student entity
 
     public Book() {
     }
